@@ -1,9 +1,9 @@
 @define-mixin sans-serif {
-  font-family: Qanelas Soft Demo, sans-serif;
+  font-family: Qanelas, sans-serif;
 }
 
 @define-mixin serif {
-  font-family: 'Libre Baskerville', serif;
+  font-family: Libre Baskerville, serif;
 }
 
 @define-mixin heading {

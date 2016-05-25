@@ -75,7 +75,8 @@ function getPlugins(isDev) {
 
 }
 
-const cssLoaderOpts = 'css?importLoaders=1&sourceMap';
+// FIXME add sourcemaps when css-loader url resolving issue is fixed
+const cssLoaderOpts = 'css?importLoaders=1';
 
 // export configuration
 module.exports = (isDev) => ({
@@ -107,18 +108,6 @@ module.exports = (isDev) => ({
     }, {
       test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
       loader: 'url?limit=10000',
-    }, {
-      test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-      loader: 'file?limit=10000&name=fonts/[name].[ext]&mimetype=application/font-woff',
-    }, {
-      test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-      loader: 'file?limit=10000&name=fonts/[name].[ext]&mimetype=application/font-woff',
-    }, {
-      test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-      loader: 'file?limit=10000&name=fonts/[name].[ext]&mimetype=application/octet-stream',
-    }, {
-      test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-      loader: 'file?limit=10000&name=fonts/[name].[ext]',
     }],
   },
   postcss: (wp) => ([

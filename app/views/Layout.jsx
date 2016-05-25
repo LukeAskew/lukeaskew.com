@@ -5,11 +5,11 @@ class Layout extends React.Component {
     return (
       <html lang={'en'}>
         <head>
-          <meta charset={'utf-8'} />
-          <meta http-equiv={'x-ua-compatible'} content={'ie=edge'} />
+          <meta charSet={'utf-8'} />
+          <meta httpEquiv={'x-ua-compatible'} content={'ie=edge'} />
           <meta name={'viewport'} content={'width=device-width, initial-scale=1'} />
           <title>{'Title'}</title>
-          {(process.env.NODE_ENV === 'production') ? <link rel={'stylesheet'} href={'/main.css'} /> : ''}
+          {(process.env.NODE_ENV === 'production') ? <link rel={'stylesheet'} href={'/main.css'} /> : <link />}
         </head>
         <body>
           <div id={'app'}>

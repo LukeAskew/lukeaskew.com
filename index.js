@@ -1,10 +1,9 @@
 import express from 'express';
-import path from 'path';
 import compression from 'compression';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpack from 'webpack';
-import rawConfig from'./webpack.config';
+import rawConfig from './webpack.config';
 import React from 'react';
 import { match, RouterContext } from 'react-router';
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -33,7 +32,7 @@ function bundle() {
       console.log('Assets bundled...');
       return resolve();
     });
-  })
+  });
 }
 
 // start express app
@@ -57,6 +56,8 @@ if (isDev) {
   app.use(express.static(webpackConfig.output.path));
 }
 
+// serve fonts
+app.use('/fonts', express.static(`${__dirname}/app/fonts`));
 
 // handle requests
 app.get('*', (req, res) => {
