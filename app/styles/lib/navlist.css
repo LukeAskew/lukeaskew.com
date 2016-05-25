@@ -1,0 +1,15 @@
+.navlist-container {
+  @media (--breakpoint-sm) {
+    padding-left: 1rem
+  }
+
+  @media (--breakpoint-md) {
+    margin-top: -2rem;
+  }
+
+  .col {
+    @media (--breakpoint-md) {
+      margin-right: 2rem
+    }
+  }
+}

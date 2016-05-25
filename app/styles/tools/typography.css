@@ -1,0 +1,13 @@
+@define-mixin sans-serif {
+  font-family: Qanelas Soft Demo, sans-serif;
+}
+
+@define-mixin serif {
+  font-family: 'Libre Baskerville', serif;
+}
+
+@define-mixin heading {
+  @mixin sans-serif;
+  font-weight: 800;
+  line-height: 1.2;
+}

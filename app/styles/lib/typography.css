@@ -1,0 +1,62 @@
+/*@font-face {
+  font-family: 'Libre Baskerville';
+  src: url('/fonts/LibreBaskerville-Regular.eot');
+  src: url('/fonts/LibreBaskerville-Regular.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/LibreBaskerville-Regular.woff2') format('woff2'),
+    url('/fonts/LibreBaskerville-Regular.woff') format('woff'),
+    url('/fonts/LibreBaskerville-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Libre Baskerville';
+  src: url('/fonts/LibreBaskerville-Italic.eot');
+  src: url('/fonts/LibreBaskerville-Italic.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/LibreBaskerville-Italic.woff2') format('woff2'),
+    url('/fonts/LibreBaskerville-Italic.woff') format('woff'),
+    url('/fonts/LibreBaskerville-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Qanelas';
+  src: url('/fonts/QanelasSoft-ExtraBold.eot');
+  src: url('/fonts/QanelasSoft-ExtraBold.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/QanelasSoft-ExtraBold.woff2') format('woff2'),
+    url('/fonts/QanelasSoft-ExtraBold.woff') format('woff'),
+    url('/fonts/QanelasSoft-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+*/
+
+:root {
+  font-size: 18px;
+}
+
+:focus {
+  outline: thin solid currentColor;
+}
+
+body {
+  @mixin serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--black);
+}
+
+h1,
+.h1 {
+  @mixin heading;
+  font-size: 4rem;
+}
+
+.small {
+  font-size: 0.875rem;
+}
+
+.large {
+  font-size: 1.5rem;
+}

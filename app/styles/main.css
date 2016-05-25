@@ -1,5 +1,15 @@
-@import 'sanitize.css/sanitize.css';
+@import 'sanitize.css/sanitize';
+@import 'basscss/src/basscss';
 
-body {
-  font-family: sans-serif;
-}
+@import 'variables/colors';
+@import 'variables/layout';
+
+@import 'tools/layout';
+@import 'tools/typography';
+
+@import 'lib/color';
+@import 'lib/banner';
+@import 'lib/typography';
+@import 'lib/navlist';
+@import 'lib/footer';
+@import 'lib/divider';

@@ -2,10 +2,13 @@ import path from 'path';
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import postcssImport from 'postcss-import';
-import postcssNesting from 'postcss-nesting';
+import postcssNested from 'postcss-nested';
+import postcssCustomMedia from 'postcss-custom-media';
 import postcssFocus from 'postcss-focus';
 import postcssNext from 'postcss-cssnext';
 import postcssReporter from 'postcss-reporter';
+import postcssCustomProperties from 'postcss-custom-properties';
+import postcssMixins from 'postcss-mixins';
 
 
 /**
@@ -47,7 +50,8 @@ function getPlugins(isDev) {
   if (isDev) {
 
     plugins.push(
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoErrorsPlugin()
     );
 
   } else {
@@ -71,6 +75,7 @@ function getPlugins(isDev) {
 
 }
 
+const cssLoaderOpts = 'css?importLoaders=1&sourceMap';
 
 // export configuration
 module.exports = (isDev) => ({
@@ -83,6 +88,8 @@ module.exports = (isDev) => ({
   resolve: {
     extensions: ['', '.js', '.jsx', '.css'],
   },
+  progress: true,
+  target: 'web',
   devtool: (isDev) ? 'inline-source-map' : undefined,
   plugins: getPlugins(isDev),
   module: {
@@ -96,27 +103,32 @@ module.exports = (isDev) => ({
     }, {
       test: /\.css$/,
       exclude: /node_modules/,
-      loader: (isDev) ? 'style!css!postcss-loader' : ExtractTextPlugin.extract('style', 'css?minimize=true!postcss-loader'),
+      loader: (isDev) ? `style!${cssLoaderOpts}!postcss-loader` : ExtractTextPlugin.extract('style', `${cssLoaderOpts}?minimize=true!postcss-loader`),
     }, {
       test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
-      loader: 'url-loader?limit=10000',
+      loader: 'url?limit=10000',
     }, {
       test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-      loader: 'file?name=fonts/[name].[hash].[ext]&mimetype=application/font-woff',
+      loader: 'file?limit=10000&name=fonts/[name].[ext]&mimetype=application/font-woff',
     }, {
       test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-      loader: 'file?name=fonts/[name].[hash].[ext]&mimetype=application/font-woff',
+      loader: 'file?limit=10000&name=fonts/[name].[ext]&mimetype=application/font-woff',
     }, {
       test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-      loader: 'file?name=fonts/[name].[hash].[ext]&mimetype=application/octet-stream',
+      loader: 'file?limit=10000&name=fonts/[name].[ext]&mimetype=application/octet-stream',
     }, {
       test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-      loader: 'file?name=fonts/[name].[hash].[ext]',
+      loader: 'file?limit=10000&name=fonts/[name].[ext]',
     }],
   },
-  postcss: () => ([
-    postcssImport(),
-    postcssNesting(),
+  postcss: (wp) => ([
+    postcssImport({
+      addDependencyTo: wp,
+    }),
+    postcssCustomProperties(),
+    postcssCustomMedia(),
+    postcssMixins(),
+    postcssNested(),
     postcssFocus(),
     postcssNext({
       browsers: ['last 2 versions', 'IE > 10'],

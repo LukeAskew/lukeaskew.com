@@ -1,0 +1,5 @@
+.footer {
+  @media (--breakpoint-sm) {
+    padding-left: 2rem;
+  }
+}
