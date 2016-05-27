@@ -5,9 +5,9 @@ const Footer = (props) => {
     <footer className={'mb2 divider-top'}>
       {props.items.map((item) => {
         return (<a
-                  className={'grey inline-block'}
-                  href={item.href}
-                  key={item.title}>{item.title}</a>)
+                  className={'small mr2'}
+                  href={item.fields.url}
+                  key={item.fields.title}>{item.fields.title}</a>)
       })}
     </footer>
   );
@@ -15,6 +15,10 @@ const Footer = (props) => {
 
 Footer.propTypes = {
   items: React.PropTypes.array.isRequired,
+};
+
+Footer.defaultProps = {
+  items: [],
 };
 
 export default Footer;

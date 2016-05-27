@@ -6,6 +6,7 @@ import webpack from 'webpack';
 import rawConfig from './webpack.config';
 import React from 'react';
 import { match, RouterContext } from 'react-router';
+import AsyncProps, { loadPropsOnServer } from 'async-props';
 import { renderToStaticMarkup } from 'react-dom/server';
 import routes from './app/routes';
 import Layout from './app/views/Layout';
@@ -68,8 +69,12 @@ app.get('*', (req, res) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
-      const html = renderToStaticMarkup(<Layout><RouterContext {...renderProps} /></Layout>);
-      res.status(200).send(`<!doctype html>${html}`);
+
+      loadPropsOnServer(renderProps, {}, (err, asyncProps) => {
+        const html = renderToStaticMarkup(<Layout><AsyncProps {...renderProps} {...asyncProps} /></Layout>);
+        res.status(200).send(`<!doctype html>${html}`);
+      });
+
     } else {
       res.status(404).send('Not found');
     }

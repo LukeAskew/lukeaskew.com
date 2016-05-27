@@ -19,6 +19,16 @@
 }
 
 @font-face {
+  font-family: 'Libre Baskerville';
+  src: url('/fonts/LibreBaskerville-Bold.eot');
+  src: url('/fonts/LibreBaskerville-Bold.eot?#iefix') format('embedded-opentype');
+  src: url('/fonts/LibreBaskerville-Bold.woff') format('woff');
+  src: url('/fonts/LibreBaskerville-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Qanelas';
   src: url('/fonts/QanelasSoft-ExtraBold.eot');
   src: url('/fonts/QanelasSoft-ExtraBold.eot?#iefix') format('embedded-opentype');
@@ -30,7 +40,11 @@
 
 
 :root {
-  font-size: 18px;
+  font-size: 16px;
+
+  @media (--breakpoint-md) {
+    font-size: 18px;
+  }
 }
 
 :focus {
@@ -50,10 +64,72 @@ h1,
   font-size: 4rem;
 }
 
+h2,
+.h2 {
+  @mixin heading;
+  font-size: 1.5em;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+
+  @media (--breakpoint-sm) {
+    font-size: 1.7rem;
+  }
+}
+
+h3,
+.h3 {
+  @mixin heading;
+  font-size: 1.5rem;
+}
+
+h4,
+.h4 {
+  @mixin heading;
+  font-size: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+
+  & + & {
+    text-indent: 2.5rem;
+  }
+}
+
+a {
+  color: inherit;
+  box-shadow: inset 0 -0.4rem 0 0 var(--light-grey);
+  font-style: italic;
+
+  &:hover {
+    box-shadow: inset 0 -1.2rem 0 0 var(--blue);
+    color: var(--white);
+  }
+}
+
 .small {
   font-size: 0.875rem;
 }
 
+.smaller {
+  font-size: 0.75rem;
+}
+
 .large {
   font-size: 1.5rem;
+}
+
+blockquote {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-left: 1rem;
+  font-size: 1.125rem;
+
+  @media (--breakpoint-md) {
+    padding-left: 2rem;
+  }
+
+  p {
+    font-style: italic;
+  }
 }

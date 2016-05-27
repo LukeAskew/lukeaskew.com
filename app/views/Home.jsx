@@ -2,10 +2,36 @@ import React from 'react';
 import { Link } from 'react-router';
 import NavList from '../components/NavList';
 import Footer from '../components/Footer';
+import { getProfileLinks, getWritings, getSpeakings } from '../lib/api';
+
 
 class Home extends React.Component {
 
-  // TODO add contentful API calls
+  /**
+   * Async function called by `async-props` during routing
+   * @param  {object}   params
+   * @param  {Function} cb
+   */
+  static loadProps(params, cb) {
+
+    // define necessary data endpoints
+    const data = [
+      getProfileLinks(),
+      getWritings(),
+      getSpeakings()
+    ];
+
+    // get all, the callback to async-props
+    Promise.all(data)
+      .then((data) => {
+        cb(null, {
+          profileLinks: data[0],
+          writings: data[1],
+          speakings: data[2],
+        })
+      });
+
+  }
 
   render() {
     return (
@@ -27,22 +53,28 @@ class Home extends React.Component {
               <NavList
                 heading={'Writing'}
                 slug={'writing'}
-                items={[{ slug: 'foo', title: 'Some Post' }]} />
+                items={this.props.writings.items} />
             </div>
             <div className={'col col-12 sm-col-5 lg-col-4'}>
               <NavList
                 heading={'Speaking'}
                 slug={'speaking'}
-                items={[{ slug: 'foo', title: 'Some Other Post' }]} />
+                items={this.props.speakings.items} />
             </div>
           </div>
         </div>
         <div className={'footer max-width-4 mx-auto mb3 px2'}>
-          <Footer items={[{ href: '#', title: 'Github' }]} />
-          <a href={'#'} className={'small grey'}>{'View Source'}</a>
+          <Footer items={this.props.profileLinks.items} />
+          <a href={'#'} className={'smaller'}>{'View Source'}</a>
         </div>
       </div>)
   }
 }
+
+Home.defaultProps = {
+  writings: [],
+  speakings: [],
+  profileLinks: [],
+};
 
 export default Home;

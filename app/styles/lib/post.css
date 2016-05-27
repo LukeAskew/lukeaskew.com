@@ -1,0 +1,18 @@
+.post {
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  .col {
+    &:first-child {
+      @media (--breakpoint-lg) {
+        text-align: right;
+      }
+    }
+  }
+
+  .date {
+    /* margin-top: 0.13rem; */
+  }
+}

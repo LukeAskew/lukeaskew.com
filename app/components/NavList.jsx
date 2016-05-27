@@ -8,8 +8,8 @@ const NavList = (props) => {
       {props.items.map((item) => {
         return (<Link
                   className={'italic'}
-                  to={`${props.slug}/${item.slug}`}
-                  key={item.slug}>{item.title}</Link>)
+                  to={`${props.slug}/${item.fields.slug}`}
+                  key={item.fields.slug}>{item.fields.title}</Link>)
       })}
     </div>
   );
@@ -19,6 +19,10 @@ NavList.propTypes = {
   heading: React.PropTypes.string.isRequired,
   slug: React.PropTypes.string.isRequired,
   items: React.PropTypes.array.isRequired,
+};
+
+NavList.defaultProps = {
+  items: [],
 };
 
 export default NavList;
