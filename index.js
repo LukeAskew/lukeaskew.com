@@ -5,9 +5,10 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpack from 'webpack';
 import rawConfig from './webpack.config';
 import React from 'react';
-import { match, RouterContext } from 'react-router';
+import { match } from 'react-router';
 import AsyncProps, { loadPropsOnServer } from 'async-props';
 import { renderToStaticMarkup } from 'react-dom/server';
+import cache from 'memory-cache';
 import routes from './app/routes';
 import Layout from './app/views/Layout';
 
@@ -70,10 +71,21 @@ app.get('*', (req, res) => {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
 
-      loadPropsOnServer(renderProps, {}, (err, asyncProps) => {
-        const html = renderToStaticMarkup(<Layout><AsyncProps {...renderProps} {...asyncProps} /></Layout>);
-        res.status(200).send(`<!doctype html>${html}`);
-      });
+      // pull page from cache if its available
+      const cached = cache.get(renderProps.location.pathname);
+
+      if (!isDev && cached) {
+        console.log('from cache');
+        res.status(200).send(cached);
+      } else {
+        loadPropsOnServer(renderProps, {}, (err, asyncProps) => {
+          const html = renderToStaticMarkup(<Layout><AsyncProps {...renderProps} {...asyncProps} /></Layout>);
+          const doc = `<!doctype html>${html}`;
+          res.status(200).send(doc);
+          cache.put(renderProps.location.pathname, doc);
+          console.log('not cached');
+        });
+      }
 
     } else {
       res.status(404).send('Not found');
