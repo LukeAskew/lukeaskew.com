@@ -75,7 +75,6 @@ app.get('*', (req, res) => {
       const cached = cache.get(renderProps.location.pathname);
 
       if (!isDev && cached) {
-        console.log('from cache');
         res.status(200).send(cached);
       } else {
         loadPropsOnServer(renderProps, {}, (err, asyncProps) => {
@@ -83,7 +82,6 @@ app.get('*', (req, res) => {
           const doc = `<!doctype html>${html}`;
           res.status(200).send(doc);
           cache.put(renderProps.location.pathname, doc);
-          console.log('not cached');
         });
       }
 
