@@ -65,7 +65,7 @@ class Home extends React.Component {
         </div>
         <div className={'footer max-width-4 mx-auto mb3 px2'}>
           <Footer items={this.props.profileLinks.items} />
-          <a href={'#'} className={'smaller'}>{'View Source'}</a>
+          <a href={'https://github.com/LukeAskew/lukeaskew.com'} className={'smaller'}>{'View Source'}</a>
         </div>
       </div>)
   }

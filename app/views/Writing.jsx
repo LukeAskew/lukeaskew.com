@@ -19,7 +19,9 @@ class Writing extends React.Component {
     return (
       <div>
         <PostHeading title={post.title} />
-        <PostBody post={post} />
+        <PostBody
+          {...this.props}
+          post={post} />
       </div>
     )
 

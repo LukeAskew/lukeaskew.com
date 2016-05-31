@@ -60,6 +60,7 @@
     "react-router": "^2.4.1",
     "rimraf": "^2.5.2",
     "sanitize.css": "^3.3.0",
-    "scroll-behavior": "^0.7.0"
+    "scroll-behavior": "^0.7.0",
+    "share-dialog": "^0.2.0"
   }
 }
