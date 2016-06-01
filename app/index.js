@@ -82,7 +82,7 @@ app.get('*', (req, res) => {
           const html = renderToStaticMarkup(<Layout><AsyncProps {...renderProps} {...asyncProps} /></Layout>);
           const doc = `<!doctype html>${html}`;
           res.status(200).send(doc);
-          cache.put(renderProps.location.pathname, doc);
+          cache.put(renderProps.location.pathname, doc, 3.6e+6);
         });
       }
 
