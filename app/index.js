@@ -1,17 +1,101 @@
+import path from 'path';
+import express from 'express';
+import compression from 'compression';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import webpack from 'webpack';
+import rawConfig from '../webpack.config';
 import React from 'react';
-import { Router, browserHistory } from 'react-router';
-import withScroll from 'scroll-behavior';
-import AsyncProps from 'async-props';
-import { render } from 'react-dom';
+import { match } from 'react-router';
+import AsyncProps, { loadPropsOnServer } from 'async-props';
+import { renderToStaticMarkup } from 'react-dom/server';
+import cache from 'memory-cache';
 import routes from './routes';
-import './styles/main.css';
+import Layout from './views/Layout';
 
-// entry point for client-side
-// use AsyncProps middleware
-const app = React.createElement(Router, {
-  routes,
-  history: withScroll(browserHistory),
-  render: (props) => { return React.createElement(AsyncProps, props); },
+// get environment variables
+const port = process.env.PORT || 3000;
+const isDev = process.env.NODE_ENV !== 'production';
+
+// configure webpack
+const webpackConfig = rawConfig(isDev);
+const compiler = webpack(webpackConfig);
+
+// create app
+const app = express();
+
+// run webpack
+function bundle() {
+  return new Promise((resolve, reject) => {
+    compiler.run((err) => {
+      if (err) {
+        console.error(err);
+        return reject();
+      }
+      console.log('Assets bundled...');
+      return resolve();
+    });
+  });
+}
+
+// start express app
+function startServer() {
+  app.listen(port, () => {
+    console.log(`Site running on port ${port}...`);
+  });
+}
+
+
+// apply middleware
+if (isDev) {
+  app.use(webpackDevMiddleware(compiler, {
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath,
+    silent: true,
+  }));
+  app.use(webpackHotMiddleware(compiler));
+} else {
+  app.use(compression());
+  app.use(express.static(webpackConfig.output.path));
+}
+
+// serve fonts
+app.use('/fonts', express.static(path.resolve(__dirname, '..', 'app/fonts')));
+
+// handle requests
+app.get('*', (req, res) => {
+  match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
+    // TODO add custom templates
+    if (error) {
+      res.status(500).send(error.message);
+    } else if (redirectLocation) {
+      res.redirect(302, redirectLocation.pathname + redirectLocation.search);
+    } else if (renderProps) {
+
+      // pull page from cache if its available
+      const cached = cache.get(renderProps.location.pathname);
+
+      if (!isDev && cached) {
+        res.status(200).send(cached);
+      } else {
+        loadPropsOnServer(renderProps, {}, (err, asyncProps) => {
+          const html = renderToStaticMarkup(<Layout><AsyncProps {...renderProps} {...asyncProps} /></Layout>);
+          const doc = `<!doctype html>${html}`;
+          res.status(200).send(doc);
+          cache.put(renderProps.location.pathname, doc);
+        });
+      }
+
+    } else {
+      res.status(404).send('Not found');
+    }
+  });
 });
 
-render(app, document.getElementById('app'));
+
+// start server
+if (isDev) {
+  startServer();
+} else {
+  bundle().then(startServer);
+}

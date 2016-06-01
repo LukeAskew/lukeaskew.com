@@ -1,14 +1,14 @@
-import path from 'path';
-import webpack from 'webpack';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import postcssImport from 'postcss-import';
-import postcssNested from 'postcss-nested';
-import postcssCustomMedia from 'postcss-custom-media';
-import postcssFocus from 'postcss-focus';
-import postcssNext from 'postcss-cssnext';
-import postcssReporter from 'postcss-reporter';
-import postcssCustomProperties from 'postcss-custom-properties';
-import postcssMixins from 'postcss-mixins';
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const postcssImport = require('postcss-import');
+const postcssNested = require('postcss-nested');
+const postcssCustomMedia = require('postcss-custom-media');
+const postcssFocus = require('postcss-focus');
+const postcssNext = require('postcss-cssnext');
+const postcssReporter = require('postcss-reporter');
+const postcssCustomProperties = require('postcss-custom-properties');
+const postcssMixins = require('postcss-mixins');
 
 
 /**
@@ -18,7 +18,7 @@ import postcssMixins from 'postcss-mixins';
  */
 function getEntry(isDev) {
 
-  const entry = ['./app/index'];
+  const entry = ['./app/client'];
 
   if (isDev) {
     entry.push('webpack-hot-middleware/client');
