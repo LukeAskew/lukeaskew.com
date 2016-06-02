@@ -11,8 +11,22 @@
       }
     }
   }
+}
 
-  .date {
-    /* margin-top: 0.13rem; */
-  }
+.video {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  text-align: center;
+}
+
+.video div,
+.video embed,
+.video object,
+.video iframe {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
 }

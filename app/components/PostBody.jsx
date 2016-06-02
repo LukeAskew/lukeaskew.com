@@ -17,6 +17,7 @@ const PostBody = (props) => {
             className={'mt1 grey'} />
         </div>
         <div className={'col lg-col-8'}>
+          {props.post.videoEmbed ? <div className={'video mb2'} dangerouslySetInnerHTML={{ __html: marked(props.post.videoEmbed) }} /> : ''}
           <div dangerouslySetInnerHTML={{ __html: marked(props.post.body) }} />
           <div className={'mb3 divider-top'}>
             <Link to={'/'} className={'back-link'}>{'\u2190 Home'}</Link>
