@@ -43,6 +43,7 @@
 
 .site-heading {
   font-size: 4.5rem;
+  padding-left: 1rem;
 
   @media (--breakpoint-xs) {
     font-size: 5.5rem;
@@ -54,6 +55,7 @@
 
   @media (--breakpoint-md) {
     font-size: 7rem;
+    padding-left: 0;
   }
 
   div {
