@@ -1,4 +1,10 @@
 .post {
+  max-width: 40rem;
+
+  @media (--breakpoint-lg) {
+    max-width: var(--width-4)
+  }
+
   img {
     max-width: 100%;
     display: block;

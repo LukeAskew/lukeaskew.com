@@ -4,12 +4,18 @@ import { Link } from 'react-router';
 const NavList = (props) => {
   return (
     <div className={'bg-white mb2 p2'}>
-      <div className={'grey'}>{props.heading}</div>
+      <div className={'grey mb1'}>{props.heading}</div>
       {props.items.map((item) => {
-        return (<Link
-                  className={'italic'}
-                  to={`${props.slug}/${item.fields.slug}`}
-                  key={item.fields.slug}>{item.fields.title}</Link>)
+        return (
+          <div
+            key={item.fields.slug}
+            className={'mb2'}>
+            <Link
+                className={'italic'}
+                to={(item.fields.url) ? item.fields.url : `${props.slug}/${item.fields.slug}`}>
+                  {item.fields.title}</Link>
+          </div>
+        );
       })}
     </div>
   );

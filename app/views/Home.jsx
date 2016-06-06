@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import NavList from '../components/NavList';
 import Footer from '../components/Footer';
-import { getProfileLinks, getWritings, getSpeakings } from '../lib/api';
+import { getProfileLinks, getWritings, getSpeakings, getProjects } from '../lib/api';
 
 
 class Home extends React.Component {
@@ -18,7 +18,8 @@ class Home extends React.Component {
     const data = [
       getProfileLinks(),
       getWritings(),
-      getSpeakings()
+      getSpeakings(),
+      getProjects()
     ];
 
     // get all, the callback to async-props
@@ -28,6 +29,7 @@ class Home extends React.Component {
           profileLinks: data[0],
           writings: data[1],
           speakings: data[2],
+          projects: data[3],
         })
       });
 
@@ -60,6 +62,10 @@ class Home extends React.Component {
                 heading={'Speaking'}
                 slug={'speaking'}
                 items={this.props.speakings.items} />
+              <NavList
+                heading={'Projects'}
+                slug={'projects'}
+                items={this.props.projects.items} />
             </div>
           </div>
         </div>

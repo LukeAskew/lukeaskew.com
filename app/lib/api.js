@@ -10,11 +10,15 @@ export function getProfileLinks() {
 }
 
 export function getWritings() {
-  return client.getEntries({ content_type: 'writing', order: 'fields.publishedDate' });
+  return client.getEntries({ content_type: 'writing', order: '-fields.publishedDate' });
 }
 
 export function getSpeakings() {
-  return client.getEntries({ content_type: 'speaking', order: 'fields.publishedDate' });
+  return client.getEntries({ content_type: 'speaking', order: '-fields.publishedDate' });
+}
+
+export function getProjects() {
+  return client.getEntries({ content_type: 'projects' });
 }
 
 export function getEntry(type, slug) {
