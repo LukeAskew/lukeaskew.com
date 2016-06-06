@@ -7,8 +7,9 @@ import webpack from 'webpack';
 import rawConfig from '../webpack.config';
 import React from 'react';
 import { match } from 'react-router';
+import Helmet from 'react-helmet';
 import AsyncProps, { loadPropsOnServer } from 'async-props';
-import { renderToStaticMarkup } from 'react-dom/server';
+import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import cache from 'memory-cache';
 import routes from './routes';
 import Layout from './views/Layout';
@@ -79,7 +80,10 @@ app.get('*', (req, res) => {
         res.status(200).send(cached);
       } else {
         loadPropsOnServer(renderProps, {}, (err, asyncProps) => {
-          const html = renderToStaticMarkup(<Layout><AsyncProps {...renderProps} {...asyncProps} /></Layout>);
+          const pageProps = Object.assign(renderProps, asyncProps);
+          const body = renderToStaticMarkup(React.createElement(AsyncProps, pageProps));
+          const head = Helmet.rewind();
+          const html = renderToStaticMarkup(React.createElement(Layout, { head, body }));
           const doc = `<!doctype html>${html}`;
           res.status(200).send(doc);
           cache.put(renderProps.location.pathname, doc, 3.6e+6);

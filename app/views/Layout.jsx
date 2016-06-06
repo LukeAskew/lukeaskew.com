@@ -21,14 +21,12 @@ class Layout extends React.Component {
           <meta charSet={'utf-8'} />
           <meta httpEquiv={'x-ua-compatible'} content={'ie=edge'} />
           <meta name={'viewport'} content={'width=device-width, initial-scale=1'} />
-          <title>{'Title'}</title>
+          {this.props.head.title.toComponent()}
           {(process.env.NODE_ENV === 'production') ? <link rel={'stylesheet'} href={'/main.css'} /> : <link />}
           <script dangerouslySetInnerHTML={{__html: this.GA }}></script>
         </head>
         <body>
-          <div id={'app'}>
-            {this.props.children}
-          </div>
+          <div id={'app'} dangerouslySetInnerHTML={{__html: this.props.body }}></div>
           <script src={'/main.js'} async />
         </body>
       </html>
