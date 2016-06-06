@@ -10,4 +10,8 @@
   @mixin sans-serif;
   font-weight: 800;
   line-height: 1.2;
+
+  &:first-child {
+    margin-top: 0;
+  }
 }
