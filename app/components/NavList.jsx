@@ -15,7 +15,7 @@ const NavList = (props) => {
             ) : (
               <Link
                 className={'italic'}
-                 to={`${props.slug}/${item.fields.slug}`}>{item.fields.title}</Link>
+                to={`/${props.slug}/${item.fields.slug}`}>{item.fields.title}</Link>
             )}
           </div>
         );

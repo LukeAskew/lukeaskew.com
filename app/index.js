@@ -70,7 +70,7 @@ app.use(favicon(path.resolve(__dirname, '..', 'app/favicon.ico')));
 // handle requests
 app.get('*', (req, res) => {
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
-    // TODO add custom templates
+
     if (error) {
       res.status(500).send(error.message);
     } else if (redirectLocation) {
