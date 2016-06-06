@@ -1,39 +1,35 @@
 @font-face {
   font-family: 'Libre Baskerville';
-  src: url('/fonts/LibreBaskerville-Regular.eot');
-  src: url('/fonts/LibreBaskerville-Regular.eot?#iefix') format('embedded-opentype');
-  src: url('/fonts/LibreBaskerville-Regular.woff') format('woff');
   src: url('/fonts/LibreBaskerville-Regular.ttf') format('truetype');
+  src: url('/fonts/LibreBaskerville-Regular.woff') format('woff');
+  src: url('/fonts/LibreBaskerville-Regular.woff2') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Libre Baskerville';
-  src: url('/fonts/LibreBaskerville-Italic.eot');
-  src: url('/fonts/LibreBaskerville-Italic.eot?#iefix') format('embedded-opentype');
-  src: url('/fonts/LibreBaskerville-Italic.woff') format('woff');
   src: url('/fonts/LibreBaskerville-Italic.ttf') format('truetype');
+  src: url('/fonts/LibreBaskerville-Italic.woff') format('woff');
+  src: url('/fonts/LibreBaskerville-Italic.woff2') format('woff');
   font-weight: normal;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Libre Baskerville';
-  src: url('/fonts/LibreBaskerville-Bold.eot');
-  src: url('/fonts/LibreBaskerville-Bold.eot?#iefix') format('embedded-opentype');
-  src: url('/fonts/LibreBaskerville-Bold.woff') format('woff');
   src: url('/fonts/LibreBaskerville-Bold.ttf') format('truetype');
+  src: url('/fonts/LibreBaskerville-Bold.woff') format('woff');
+  src: url('/fonts/LibreBaskerville-Bold.woff2') format('woff');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Qanelas';
-  src: url('/fonts/QanelasSoft-ExtraBold.eot');
-  src: url('/fonts/QanelasSoft-ExtraBold.eot?#iefix') format('embedded-opentype');
-  src: url('/fonts/QanelasSoft-ExtraBold.woff') format('woff');
   src: url('/fonts/QanelasSoft-ExtraBold.ttf') format('truetype');
+  src: url('/fonts/QanelasSoft-ExtraBold.woff') format('woff');
+  src: url('/fonts/QanelasSoft-ExtraBold.woff2') format('woff2');
   font-weight: 800;
   font-style: normal;
 }
@@ -54,7 +50,7 @@
 body {
   @mixin serif;
   font-size: 1rem;
-  line-height: 1.9;
+  line-height: 1.8;
   color: var(--black);
 }
 
@@ -90,6 +86,19 @@ h4,
 
 p {
   margin-bottom: 1.5rem;
+}
+
+ol {
+  counter-reset: ol-counter;
+  list-style-type: none;
+  margin-bottom: 1.5rem;
+
+  > li {
+    &:before {
+      content: counters(ol-counter,'.') '. ';
+      counter-increment: ol-counter;
+    }
+  }
 }
 
 a {

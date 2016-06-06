@@ -10,10 +10,13 @@ const NavList = (props) => {
           <div
             key={item.fields.slug}
             className={'mb2'}>
-            <Link
+            {(item.fields.url) ? (
+              <a href={item.fields.url}>{item.fields.title}</a>
+            ) : (
+              <Link
                 className={'italic'}
-                to={(item.fields.url) ? item.fields.url : `${props.slug}/${item.fields.slug}`}>
-                  {item.fields.title}</Link>
+                 to={`${props.slug}/${item.fields.slug}`}>{item.fields.title}</Link>
+            )}
           </div>
         );
       })}
