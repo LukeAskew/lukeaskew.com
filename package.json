@@ -61,6 +61,7 @@
     "rimraf": "^2.5.2",
     "sanitize.css": "^3.3.0",
     "scroll-behavior": "^0.7.0",
+    "serve-favicon": "^2.3.0",
     "share-dialog": "^0.2.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1"

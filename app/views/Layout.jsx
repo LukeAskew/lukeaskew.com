@@ -22,6 +22,7 @@ class Layout extends React.Component {
           <meta httpEquiv={'x-ua-compatible'} content={'ie=edge'} />
           <meta name={'viewport'} content={'width=device-width, initial-scale=1'} />
           {this.props.head.title.toComponent()}
+          <link rel={'shortcut icon'} type={'image/x-icon'} href={'/favicon.ico'} />
           {(process.env.NODE_ENV === 'production') ? <link rel={'stylesheet'} href={'/main.css'} /> : <link />}
           <script dangerouslySetInnerHTML={{__html: this.GA }}></script>
         </head>

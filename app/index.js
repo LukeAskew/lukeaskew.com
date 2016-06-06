@@ -1,5 +1,6 @@
 import path from 'path';
 import express from 'express';
+import favicon from 'serve-favicon';
 import compression from 'compression';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
@@ -9,7 +10,7 @@ import React from 'react';
 import { match } from 'react-router';
 import Helmet from 'react-helmet';
 import AsyncProps, { loadPropsOnServer } from 'async-props';
-import { renderToStaticMarkup, renderToString } from 'react-dom/server';
+import { renderToStaticMarkup } from 'react-dom/server';
 import cache from 'memory-cache';
 import routes from './routes';
 import Layout from './views/Layout';
@@ -62,6 +63,9 @@ if (isDev) {
 
 // serve fonts
 app.use('/fonts', express.static(path.resolve(__dirname, '..', 'app/fonts')));
+
+// serve favicon
+app.use(favicon(path.resolve(__dirname, '..', 'app/favicon.ico')));
 
 // handle requests
 app.get('*', (req, res) => {
