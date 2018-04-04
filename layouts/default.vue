@@ -1,3 +1,22 @@
+<template>
+  <div>
+    <nuxt />
+
+    <Footer />
+  </div>
+</template>
+
+<script>
+import Footer from '~/components/Footer.vue';
+
+export default {
+  components: {
+    Footer,
+  },
+};
+</script>
+
+<style>
 @font-face {
   font-family: 'Libre Baskerville';
   src: url('/fonts/LibreBaskerville-Regular.woff2') format('woff'),
@@ -34,108 +53,64 @@
   font-style: normal;
 }
 
-
-:root {
-  font-size: 16px;
-
-  @media (--breakpoint-md) {
-    font-size: 18px;
-  }
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
 }
 
-:focus {
-  outline: thin solid currentColor;
+html {
+  font-family: Libre Baskerville, serif;
+  font-size: 16px;
+  word-spacing: 1px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
 }
 
 body {
-  @mixin serif;
+  color: #333;
+}
+
+h1 {
+  font-family: Qanelas, sans-serif;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+h2 {
   font-size: 1rem;
-  line-height: 1.8;
-  color: var(--black);
-}
-
-h1,
-.h1 {
-  @mixin heading;
-  font-size: 4rem;
-}
-
-h2,
-.h2 {
-  @mixin heading;
-  font-size: 1.5em;
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
-
-  @media (--breakpoint-sm) {
-    font-size: 1.7rem;
-  }
-}
-
-h3,
-.h3 {
-  @mixin heading;
-  font-size: 1.5rem;
-}
-
-h4,
-.h4 {
-  @mixin heading;
-  font-size: 1rem;
-}
-
-p {
-  margin-bottom: 1.5rem;
-}
-
-ol {
-  counter-reset: ol-counter;
-  list-style-type: none;
-  margin-bottom: 1.5rem;
-
-  > li {
-    &:before {
-      content: counters(ol-counter,'.') '. ';
-      counter-increment: ol-counter;
-    }
-  }
+  color: #aaa;
+  margin-bottom: 1em;
 }
 
 a {
   color: inherit;
-  box-shadow: inset 0 -0.4rem 0 0 var(--light-grey);
+  box-shadow: inset 0 -0.4rem 0 0 #e2e2e2;
   font-style: italic;
-
-  &:hover {
-    box-shadow: inset 0 -1.2rem 0 0 var(--blue);
-    color: var(--white);
-  }
+  text-decoration: none;
 }
 
-.small {
-  font-size: 0.875rem;
+a:hover {
+  box-shadow: inset 0 -1.2rem 0 0 #0033cc;
+  color: #fff;
 }
 
-.smaller {
-  font-size: 0.75rem;
-}
-
-.large {
-  font-size: 1.5rem;
-}
-
-blockquote {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+.container {
+  max-width: 60rem;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
   padding-left: 1rem;
-  font-size: 1.125rem;
+  padding-right: 1rem;
+}
 
-  @media (--breakpoint-md) {
-    padding-left: 2rem;
-    box-shadow: inset 0.4rem 0 0 0 var(--light-grey);
-  }
-
-  p {
-    font-style: italic;
+@media (min-width: 60rem) {
+  html {
+    font-size: 18px;
   }
 }
+</style>

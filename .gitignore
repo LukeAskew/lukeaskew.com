@@ -1,8 +1,6 @@
-node_modules
 .DS_Store
-public
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
+node_modules
+yarn.lock
+npm-debug.log
+.nuxt
+dist

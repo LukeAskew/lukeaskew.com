@@ -1,17 +1,24 @@
 # lukeaskew.com
 
-My personal website - an isomorphic React app with a Contentful Baas
+> My personal website - a universal JavaScript app built with Vue.js
 
-## Quick Start
+## Usage
+
+Install dependencies:
+
+``` bash
+$ yarn install
+```
+
+Local development:
+
+```bash
+$ npm run dev
+```
+
+Build for production and launch server:
 
 ```
-npm start
+$ npm run build
+$ npm start
 ```
-
-## Environment Vars
-
-Var | Purpose
---- | ---
-`NODE_ENV` | The node environment. Set to `production` when running in production
-`PORT` | Server port to use
-`CONTENTFUL_ACCESS_TOKEN` | Token used to access contentful API
