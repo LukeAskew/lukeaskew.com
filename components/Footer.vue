@@ -2,10 +2,6 @@
   <div class="footer">
     <ul>
       <li>
-        <a href="/luke-askew.pdf">R&eacute;sum&eacute;</a>
-      </li>
-
-      <li>
         <a href="https://github.com/LukeAskew/lukeaskew.com">View Source</a>
       </li>
     </ul>
