@@ -1,24 +1,23 @@
 # lukeaskew.com
 
-> My personal website - a universal JavaScript app built with Vue.js
+> My personal website
 
 ## Usage
 
 Install dependencies:
 
-``` bash
-$ yarn install
+```bash
+yarn install
 ```
 
 Local development:
 
 ```bash
-$ npm run dev
+yarn start
 ```
 
-Build for production and launch server:
+Build for production:
 
-```
-$ npm run build
-$ npm start
+```bash
+yarn build
 ```
