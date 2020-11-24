@@ -28,10 +28,6 @@ const Footer: React.FC = () => (
     <Link css={LINK_STYLES} to={'https://www.linkedin.com/in/lukeaskew/'}>
       {'LinkedIn'}
     </Link>
-
-    <Link css={LINK_STYLES} to={'https://medium.com/@lukeaskew'}>
-      {'Medium'}
-    </Link>
   </Container>
 );
 
